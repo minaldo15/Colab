@@ -1,0 +1,29 @@
+## Improve Query
+- Django ORM
+  - 장점
+    - SQL을 사용하는 대신 객체 지향적으로 데이터를 조회할 수 있다.
+    - 재사용, 유지보수 쉽다
+    - DBMS에 대한 의존도가 떨어진다.
+  - 단점
+    - 복잡한 SQL문을 그대로 재현하기 어려움
+    - 멋모르고 사용하면 이상한 쿼리 나감(N+1 Problem이 대표적)
+
+- Django ORM 특징
+  - Django ORM은 기본적으로 `Lazy Loading` 전략을 사용
+  - ORM을 작성하면 Database에 Query하는 것이 아니라, 미루다가 실제로 데이터를 사용할 때 Database에 Query를 날린다.
+  - ORM 함수를 호출할 때가 아닌, Queryset이 실제로 평가될 때 DB를 호출한다.
+  - Queryset이 실제로 모습을 드러내야 할 때 DB를 부른다는 것
+  - 똑같은 데이터를 사용한다면 `캐싱`을 내부적으로 해둔다.
+- Lazy Loading
+  - 지연로딩을 하는이유
+    - 성능 개선
+- Eager Loading
+  - N+1 문제 해결을 위해
+  - 보통 여러 테이블의 데이터를 한 번에 가져올 때 사용
+- select_related
+  - 1:1 또는 N:1 참조 관계에서 사용
+  - SQL 에서 `INNER JOIN` 절을 활용
+    - SQL 에서 INNER JOIN을 사용하여 참조하는 테이블의 일부를 가져오고, SELECT FROM을 통해 관련된 필드들을 가져옴
+- prefetch_related
+  - M:N 또는 N:1 역참조 관계에서 사용
+  - SQL이 아닌 `Python`을 통한 JOIN이 진행됨
