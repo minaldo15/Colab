@@ -1,0 +1,65 @@
+# Vue_02
+- INDEX
+  - Basic of syntax
+  - Vue advanced
+
+## Basic of syntax
+- Template Syntax
+  - Vue2 guide > Template Syntax 참고
+  - ``렌더링 된 DOM``을 기본 Vue instance의 data에 ``선언적으로 바인딩``할 수 있는 HTML 기반 ``Template Syntax``를 사용
+    - 렌더링 된 DOM: 브라우저에 의해 보기 좋게 그려질 HTML 코드
+    - HTML 기반 Template Syntax: HTML 코드에 직접 작성할 수 있는 문법 제공
+    - 선언적으로 바인딩: Vue instance와 DOM을 연결
+- Text Interpolation
+  - 가장 기본적인 바인딩 방법
+  - 중괄호 2개로 표기
+  - DTL과 동일한 형태로 작성
+  - Text interpolation 방법은 모두 일반 텍스트로 표현
+- RAW HTML
+  - v-html directive를 사용하여 data와 바인딩
+  - directive-HTML 기반 template syntax
+  - HTML의 기본속성이 아닌 Vue가 제공하는 특수 속성의 값으로 data를 작성
+
+### Directives
+- Directives 기본 구성
+  - v-접두사가 있는 특수 속성에는 값을 할당할 수 있음
+    - 값에는 JS 표현식을 작성할 수 있음
+  - directive의 역할은 표현식의 값이 변경될 때 반응적으로 DOM에 적용하는 것
+  - `v-on:submit.prevent="onSubmit"`
+    - `:` 을 통해 전달인자를 받을 수 있음
+    - `.` 으로 표시되는 특수 접미사 - directive를 특별한 방법으로 바인딩 해야 함
+- 새 Vue instance 생성
+  - 각각의 instance들은 연결된 DOM element에만 영향을 미침
+  - 연결되지 않은 DOM이 Vue의 영향을 받지 않았던 것과 동일한 상황
+- v-text
+  - Template Interpolation과 함께 가장 기본적인 바인딩 방법
+  - {{}} 와 동일한 역할
+- v-html
+  - RAW HTML을 표현할 수 있는 방법
+  - 단, 사용자가 입력하거나 제공하는 컨텐츠에는 절대 사용 금지
+- v-show
+  - 표현식에 작성된 값에 따라 element를 보여줄 것인지 결정
+    - boolean 값이 변경될 때 마다 반응
+  - 대상 element의 display 속성을 기본 속성과 none으로 toggle
+  - 요소 자체는 항상 DOM에 렌더링 됨
+  - 바인딩 된 isActive의 값이 false이므로 첫 방문 시 p tag는 보이지 않음
+    - vue dev tools에서 isActive 변경 시 화면에 출력
+    - 값을 false로 변경 시 다시 사라짐
+  - 화면에서만 사라졌을 뿐, DOM에는 존재한다.
+    - display 속성이 변경되었을 뿐
+- v-if
+  - v-show와 사용 방법은 동일
+  - isActive의 값이 변경될 때 반응
+  - 단, 값이 false인 경우 DOM에서 사라짐
+  - v-if v-else-if v-else 형태로 사용
+- v-show VS v-if
+  - v-show
+    - 표현식 결과와 관계 없이 렌더링 되므로 초기 렌더링에 필요한 비용은 v-if 보다 놓을 수 있음
+    - display 속성 변경으로 표현 여부를 판단하므로 렌더링 후 toggle 비용은 적음
+  - v-if
+    - 표현식 결과가 false인 경우 렌더링조차 되지 않으므로 초기 렌더링 비용은 v-show 보다 낮을 수 있음
+    - 단, 표현식 값이 자주 변경되는 경우 잦은 재 렌더링으로 비용이 증가할 수 있음
+- v-for
+  - for .. in .. 형식으로 작성
+  - 반복한 데이터 타입에 모두 사용 가능
+  - index를 함께 출력하고자 한다면 `(char, index)` 형태로 사용 가능
